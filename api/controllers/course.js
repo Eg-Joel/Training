@@ -1,11 +1,12 @@
 
-const { createCourse, getAllCourses, getCourseById, updateCourse, deleteCourse } = require("../models/course");
+const { createCourse, getAllCourses, getCourseById, updateCourse, deleteCourse, getTotalCourses } = require("../models/course");
+const { getTotalUsers } = require("../models/user");
 
 
 
 
 exports.createCourse = async (req, res, next) => {
-   console.log(req.body);
+
     const { name, description } = req.body;
 
   try {
@@ -29,6 +30,17 @@ exports.createCourse = async (req, res, next) => {
     }
   };
 
+  exports.getAllCourse = async (req, res, next) => {
+   
+    try {
+ 
+      const courses = await getAllCourses();
+      res.status(200).json(courses);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   exports.getCourse = async (req, res, next) => {
     const courseId = req.params.id;
 
@@ -38,6 +50,18 @@ exports.createCourse = async (req, res, next) => {
         return res.status(404).json({ message: "Course not found" });
       }
       res.status(200).json(course);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  exports.getCounts = async (req, res, next) => {
+
+    try {
+      const course = await getTotalCourses();
+      const totalUsers = await getTotalUsers()
+      
+      res.status(200).json({course,totalUsers});
     } catch (error) {
       next(error);
     }

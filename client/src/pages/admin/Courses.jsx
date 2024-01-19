@@ -18,7 +18,7 @@ function Courses() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const adminDetails = useSelector((state) => state.admin);
-  let accesstoken = adminDetails?.currentAdmin.token;
+  let accesstoken = adminDetails?.currentAdmin?.token;
   const [openModal, setOpenModal] = useState(false);
   const [selectedCourseData, setSelectedCourseData] = useState(null);
 

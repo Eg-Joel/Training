@@ -1,5 +1,5 @@
 const { adminLogin, adminLogout } = require("../controllers/adminController");
-const { createCourse, getAllCourses, getCourse, editCourse, deleteCourse } = require("../controllers/course");
+const { createCourse, getAllCourses, getCourse, editCourse, deleteCourse, getCounts } = require("../controllers/course");
 const { getAllUser } = require("../controllers/userController");
 const { verifyAdminToken } = require("../middlewares/verifyToken");
 
@@ -21,5 +21,7 @@ router.put("/editCourse/:id",verifyAdminToken,editCourse)
 router.delete("/deleteCourse/:id",verifyAdminToken,deleteCourse)
 
 router.get("/getAllStudents",verifyAdminToken,getAllUser)
+
+router.get("/totalCounts",verifyAdminToken,getCounts)
 
 module.exports = router;

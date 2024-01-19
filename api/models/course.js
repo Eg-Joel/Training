@@ -36,6 +36,17 @@ const createCourse = async (name, description) => {
     }
   };
 
+  const getTotalCourses = async () => {
+    const query = "SELECT COUNT(*) FROM courses";
+  
+    try {
+      const result = await pool.query(query);
+      return result.rows[0].count;
+    } catch (error) {
+      console.error("Error getting total courses:", error);
+      throw errorHandler(500, 'Error getting total courses: Internal Server Error');
+    }
+  };
   
 const updateCourse = async (id, name, description) => {
     const query = "UPDATE courses SET name = $2, description = $3 WHERE id = $1 RETURNING *";
@@ -66,4 +77,5 @@ const updateCourse = async (id, name, description) => {
     getAllCourses,
     updateCourse,
     deleteCourse,
+    getTotalCourses
   };
